@@ -13,9 +13,10 @@
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
+  /* color: rgb(131, 243, 111) */
 }
 .logo {
-  width: 3.5rem;
+  width: 4rem;
 }
 .text-container {
   flex-direction: column !important;

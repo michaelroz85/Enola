@@ -21,7 +21,7 @@ const MainBlueButton = styled("button")`
 
   :after {
     content: "";
-    background-color: #8ca8e0;
+    background-color: #4983b2;
     border-radius: 30px;
     width: 100%;
     z-index: -1;

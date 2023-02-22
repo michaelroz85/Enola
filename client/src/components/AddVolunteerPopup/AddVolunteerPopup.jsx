@@ -11,7 +11,7 @@ import FormLabel from "../FormLabel/FormLabel";
 import CloseIcon from "@mui/icons-material/Close";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { addVolunteerSchema } from "../CreateFamilyForm/schema";
+import { AddVolunteerSchema } from "../CreateFamilyForm/schema";
 import { CloseButton } from "./styled";
 import "./AddVolunteerPopup.css";
 
@@ -20,7 +20,7 @@ export default function AddVolunteerPopup({ open, setOpen, family_id }) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(addVolunteerSchema), mode: "onBlur" });
+  } = useForm({ resolver: yupResolver(AddVolunteerSchema), mode: "onBlur" });
   const [volunteer, setVolunteer] = useState({
     family_id: family_id,
     name: "",
@@ -32,12 +32,16 @@ export default function AddVolunteerPopup({ open, setOpen, family_id }) {
   };
 
   const createVolunteer = () => {
-    fetch("http://18.197.147.245/api/volunteers/", {
+    fetch("http://localhost:5000/volunteers/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": localStorage.token
+       },
       body: JSON.stringify(volunteer),
     });
     setVolunteer({ ...volunteer, name: "", phone: "" });
+    setOpen(false);
   };
 
   return (
@@ -78,7 +82,7 @@ export default function AddVolunteerPopup({ open, setOpen, family_id }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleSubmit(createVolunteer)}>הוסף</Button>
-          <Button onClick={handleClose}>סיים</Button>
+          <Button onClick={handleClose}>בטל</Button>
         </DialogActions>
       </Dialog>
     </div>

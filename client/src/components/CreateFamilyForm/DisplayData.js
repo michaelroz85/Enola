@@ -2,148 +2,119 @@ import { Typography, Grid } from "@mui/material";
 import MainGreenButton from "../styled/MainGreenButton";
 import { useParams, useNavigate } from "react-router-dom";
 import MainBlueButton from "../styled/MainBlueButton";
-import { buttonStyle } from "./styles.js";
+import { buttonStyle, textStyle } from "./styles.js";
 import DetailsItem from "../DetailsItem/DetailsItem.jsx";
-import {
-  familyStatusOptions,
-  hospitalOptions,
-  insuranseOptions,
-  gendrerOptions,
-  languageOptions,
-} from "../../constants/SelectData.js";
+import Volunteers from "../../pages/volunteers-page/VolunteersPage";
 
-const DisplayData = ({ data, image, setStep }) => {
-  const displayDataFields = {
-    personalInfo: [
-      { fieldName: "שם פרטי", fieldValue: data.first_name },
-      { fieldName: "שם משפחה", fieldValue: data.last_name },
-      { fieldName: "טלפון בבית", fieldValue: data.home_phone },
-      { fieldName: "טלפון נייד", fieldValue: data.cell_phone },
-      { fieldName: "דוא''ל", fieldValue: data.mail },
-      { fieldName: "כתובת", fieldValue: data.adress },
-      { fieldName: "יישוב", fieldValue: data.city },
-      { fieldName: "גיל", fieldValue: data.age },
-      { fieldName: "מגדר", fieldValue: gendrerOptions[data.gender - 1].option },
-      {
-        fieldName: "מצב משפחתי",
-        fieldValue: familyStatusOptions[data.family_status - 1].option,
-      },
-      { fieldName: "מס ילדים", fieldValue: data.kids_num },
-      {
-        fieldName: "שפה",
-        fieldValue: languageOptions[data.language - 1].option,
-      },
-    ],
-    medicalInfo: [
-      { fieldName: "סוג המחלה", fieldValue: data.sickness },
-      {
-        fieldName: "בית חולים מטפל",
-        fieldValue: hospitalOptions[data.hospital - 1].option,
-      },
-      {
-        fieldName: "קופת חולים",
-        fieldValue:
-          insuranseOptions[data.health_maintenance_organization - 1].option,
-      },
-      { fieldName: "היסטוריה רפואית", fieldValue: data.medical_history },
-    ],
-  };
-
+const DisplayData = ({ data, setStep }) => {
+  const displayDataFields = [
+    { fieldname: "שם פרטי", fieldvalue: data.first_name },
+    { fieldname: "שם משפחה", fieldvalue: data.last_name },
+    { fieldname: "טלפון נייד", fieldvalue: data.cell_phone },
+    { fieldname: "דוא''ל", fieldvalue: data.mail },
+  ];
+  console.log("data : ", data)
   const handleUpdateFamily = () => {
-    console.log(data);
+    console.log("ערוך משפחה", data);
     if (id) {
-      fetch(`http://18.197.147.245/api/families/${id}`, {
+      fetch(`http://localhost:5000/families/${id}`, {
         method: "PUT",
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
+          "Authorization": localStorage.token
         },
         body: JSON.stringify(data),
       }).then((response) => {
-        console.log(response);
+        navigate("/families");
       });
-      navigate("/families");
     }
   };
 
   const handleCreateFamily = () => {
     const formData = new FormData();
-    formData.append("data", data);
-    formData.append("image", image);
-
-    fetch("http://18.197.147.245/api/families", {
-      method: "POST",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    navigate("/families");
+    try {
+      formData.append("data", data);
+      fetch("http://localhost:5000/families", {
+        method: "POST",
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Authorization": localStorage.token
+        },
+        body: JSON.stringify(data),
+      });
+      navigate("/families");
+    }
+    catch (err) {
+      console.log(err);
+    }
   };
 
+  const handleEditFamily = () => {
+    id = family_id;
+    setStep(1);
+  }
+
   const navigate = useNavigate();
-  const { id } = useParams();
+  let { id, family_id } = useParams();
+  console.log(id, family_id)
   return (
-    <Grid
+    <div
       container
       overflow="auto"
       style={{
-        height: "70vh",
+        direction:"rtl",
+        height: "50vh",
         textAlign: "center",
         flexFlow: "column nowrap",
         alignItems: "center",
         paddingBottom: "30px",
       }}
     >
-      <div className="details-header">
-        <Typography variant="h4" color="#8ca8e0">
-          {"נא לוודא את הפרטים לפני יצירת המשפחה"}
-        </Typography>
-      </div>
+      
+        <div className="detailsHeader">
+          <Typography variant="h4" color="#8ca8e0">
+          {(id || family_id) ? (` משפחת ${data.last_name}`): 
+          ("נא לוודא את הפרטים לפני יצירת המשפחה" )}
+          </Typography>
+        </div>
+     
       <Typography variant="h5" marginBottom="20px">
         {"פרטים אישיים"}
       </Typography>
-      {displayDataFields.personalInfo.map(({ fieldName, fieldValue }) => (
+      {displayDataFields.map(({ fieldname, fieldvalue }) => (
         <DetailsItem
-          key={fieldName}
-          fieldName={fieldName}
-          fieldValue={fieldValue}
+          style={textStyle}     
+          key={fieldname}
+          fieldValue={fieldvalue}
+          fieldName={fieldname}
         />
       ))}
-
-      <Typography variant="h5" marginBottom="20px" marginTop="20px">
-        {"פרטים רפואיים"}
-      </Typography>
-
-      {displayDataFields.medicalInfo.map(({ fieldName, fieldValue }) => (
-        <DetailsItem
-          key={fieldName}
-          fieldName={fieldName}
-          fieldValue={fieldValue}
-        />
-      ))}
-
       <div className="display-btn-container">
         <MainBlueButton
-          style={buttonStyle}
+          style={{...buttonStyle,   right: "38%" }}
           onClick={() => {
-            setStep(3);
+            setStep(1);
+            family_id && navigate(`/create-family/${family_id}`)
           }}
         >
-          {"חזור"}
+          {family_id ?("ערוך"):("חזור") }
         </MainBlueButton>
-        {id ? (
+        {id && !family_id && (
           <MainGreenButton style={buttonStyle} onClick={handleUpdateFamily}>
             עדכן משפחה
           </MainGreenButton>
-        ) : (
-          <MainGreenButton style={buttonStyle} onClick={handleCreateFamily}>
-            צור משפחה
-          </MainGreenButton>
         )}
+        {
+          !id && !family_id && (
+            <MainGreenButton style={buttonStyle} onClick={handleCreateFamily}>
+              צור משפחה
+            </MainGreenButton>)
+        } 
+        {id && <Volunteers/>}
       </div>
-    </Grid>
+    </div>
   );
 };
 

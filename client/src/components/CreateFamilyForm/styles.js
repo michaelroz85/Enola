@@ -1,17 +1,23 @@
+import { textAlign } from "@mui/system";
+import Typography from '@material-ui/core/Typography';
+
 export const formContainer = {
   overflow: "auto",
   justifyContent: "flex-start",
   paddingTop: "25px",
-  width: "90%",
+  width: "40vw",
   height: "70vh",
-  marginRight: "10px",
+  marginRight: "700px",
   flexDirection: "column",
-  flexWrap: "nowrap",
+  textAlign: "center"
+};
+export const textStyle = {
+  align: "right"
 };
 export const familyImg = {
   position: "absolute",
-  left: "30px",
-  top: "-60px",
+  left: "73%",
+  top: "460px",
   height: "180px",
   transform: "scaleX(-1)",
 };
@@ -22,8 +28,6 @@ export const leftLayout = {
   minHeight: "92.5%",
   height: "92.5%",
   alignItems: "center",
-  alignContent: "flex-end",
-  justifyContent: "center",
 };
 export const avatar = {
   flexDirection: "row",
@@ -35,7 +39,26 @@ export const buttonsContainer = {
   justifyContent: "space-between",
   flexWrap: "wrap",
 };
-export const buttonStyle = { width: "140px", height: "40px" };
+export const buttonStyle = {
+   width: "140px", 
+   height: "40px",  
+   justifyContent: "center", 
+   alignItems: "center",
+   justifyContent: "space-between",
+  flexWrap: "wrap",
+  // right: "-50%"
+};
+export const detailsHeader = {
+//   width: "140px", 
+//   height: "40px",  
+//   justifyContent: "center", 
+//   alignItems: "center",
+//   justifyContent: "space-between",
+//  flexWrap: "wrap",
+ cursor: "pointer"
+
+ // right: "-50%"
+};
 
 export const neighboorStyle = {
   height: "47vh",

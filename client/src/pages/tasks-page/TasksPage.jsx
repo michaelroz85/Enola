@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
 import Spinner from "../../components/Spinner/Spinner";
 import moment from "moment";
-import logo from "../../assets/yad-tamar-logo.png";
+import logo from "../../assets/Enola-logo.png";
 import TasksList from "./components/TasksList";
 import "./TasksPage.css";
 import { CircularProgressWithLabel } from "../tasks-page/components/CircularProgress";
@@ -26,7 +26,11 @@ function Tasks() {
   const fetchAllTasks = async () => {
     try {
       const tasksResponse = await fetch(
-        `http://18.197.147.245/api/tasks/tasks-for-family/${family_id}`
+        `http://localhost:5000/tasks/tasks-for-family/${family_id}`,{
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": localStorage.token
+        }}
       );
       if (tasksResponse.ok) {
         const tasksData = await tasksResponse.json();
@@ -99,11 +103,11 @@ function Tasks() {
         <div className="mobile-header">
           <img className="logo logo-mobile" alt="logo" src={logo}></img>
           <div className="logo-text">
-            <Typography variant="h4" lineHeight="1" fontSize="1.5rem">
-              {"יד תמר"}
+            <Typography variant="h4" lineHeight="1" fontSize="1.5rem" sx={{ color: 'primary.main' }}>
+              {"Enola"}
             </Typography>
             <Typography style={{ opacity: "0.5" }} variant="subtitle">
-              {"תמיכה במשפחות חולי סרטן ובמצבי משבר"}
+              {"ההורים שלך לא לבד"}
             </Typography>
           </div>
         </div>

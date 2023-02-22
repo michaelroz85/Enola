@@ -1,61 +1,43 @@
-import PageLayout from "../../components/PageLayout/PageLayout";
-import FormStepOne from "../../components/CreateFamilyForm/StepOne";
+import { Router, Routers, BrowserRouter } from "react-router-dom"
+import FormStepOne from './../../components/CreateFamilyForm/StepOne'
 import { useEffect, useState } from "react";
-import FormStepTwo from "../../components/CreateFamilyForm/StepTwo";
-import DisplayData from "../../components/CreateFamilyForm/DisplayData";
-import FormStepThree from "../../components/CreateFamilyForm/StepThree";
+import PageLayout from "../../components/PageLayout/PageLayout";
 import { useParams } from "react-router-dom";
+import DisplayData from "../../components/CreateFamilyForm/DisplayData";
 
-const CreateFamily = () => {
-  const { id } = useParams();
-  const [step, setStep] = useState(1);
-  const [image, setImage] = useState(null);
-  const [data, setData] = useState({
-    first_name: "",
-    last_name: "",
-    home_phone: "",
-    cell_phone: "",
-    mail: "",
-    adress: "",
-    city: "",
-    age: "",
-    gender: "",
-    family_status: "",
-    kids_num: "",
-    language: "",
-    sickness: "",
-    hospital: "",
-    health_maintenance_organization: "",
-    medical_history: "",
-  });
 
-  return (
-    <PageLayout
-      pageComponent={
-        <>
-          {step === 1 && (
-            <FormStepOne
-              setStep={setStep}
-              data={data}
-              setData={setData}
-              setImage={setImage}
-              image={image}
+const CreateFamilyPage = () => {
+    const [step, setStep] = useState(1)
+    const { id } = useParams();
+    const [position, setPosition] = useState('faulse')
+    const [image, setImage] = useState(null);
+    const [data, setData] = useState({
+        first_name: "",
+        last_name: "",
+        cell_phone: "",
+        mail: ""
+    });
+    
+    return (
+        <div>
+            <PageLayout
+                headerText={id ? "עריכת משפחה" : "יצירת משפחה"}
+                pageComponent={
+                    <>
+                        {step === 1 &&
+                            <FormStepOne
+                                setStep={setStep}
+                                data={data}
+                                setData={setData}
+                                setImage={setImage}
+                                image={image}
+                            />}
+                        {step === 2 && <DisplayData data={data} setStep={setStep} />}
+                    </>
+                }
             />
-          )}
-          {step === 2 && (
-            <FormStepTwo setStep={setStep} data={data} setData={setData} />
-          )}
-          {step === 3 && (
-            <FormStepThree setStep={setStep} data={data} setData={setData} />
-          )}
-          {step === 4 && <DisplayData data={data} setStep={setStep} />}
-        </>
-      }
-      headerText={id ? "עריכת משפחה" : "יצירת משפחה"}
-    />
-  );
-};
-export default CreateFamily;
-{
-  /* <DisplayData data={data} image={image} /> */
+        </div>
+    )
 }
+
+export default CreateFamilyPage

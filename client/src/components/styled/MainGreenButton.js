@@ -20,7 +20,7 @@ const MainGreenButton = styled("button")`
 
   :after {
     content: "";
-    background-color: #8ec371;
+    background-color: #29aa74;
     border-radius: 30px;
     width: 100%;
     z-index: -1;

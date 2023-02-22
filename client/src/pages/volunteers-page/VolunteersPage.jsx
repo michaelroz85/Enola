@@ -13,14 +13,20 @@ function Volunteers() {
   const navigate = useNavigate();
   const VolunteersPageLayout = () => {
     const [open, setOpen] = useState(false);
-    const { family_id, name } = useParams();
+    const { family_id, name, id } = useParams();
     const [volunteers, setVolunteers] = useState([]);
 
     useEffect(() => {
       const fetchVolunteers = async () => {
         try {
           const response = await fetch(
-            `http://18.197.147.245/api/volunteers/volunteers-for-family/${family_id}`
+            `http://localhost:5000/volunteers/volunteers-for-family/${family_id}/`,{
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                "Authorization": localStorage.token
+              },
+            }
           );
           if (response.ok) {
             const data = await response.json();
@@ -59,6 +65,9 @@ function Volunteers() {
                 {volunteers.map((volunteer) => {
                   return (
                     <Volunteer
+                    onAdd={ () => {
+                      console.log(id)
+                    }}
                       setVolunteers={setVolunteers}
                       name={volunteer?.first_name}
                       id={volunteer?.user_id}

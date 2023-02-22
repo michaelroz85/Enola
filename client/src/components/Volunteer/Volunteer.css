@@ -1,10 +1,14 @@
 .element-container {
   display: flex;
+  align-self: center;
   flex-direction: row;
+  background-color: #dae4ee;
   width: 50%;
   justify-content: space-between;
   align-items: center;
-  color: rgb(140, 138, 138);
+  color: rgb(140, 138, 138); 
+  cursor: pointer;
+ border-radius: 10%;
 }
 .icon {
   color: #588c64;
@@ -12,4 +16,16 @@
 .delete-icon {
   color: rgb(14, 14, 14) !important;
   cursor: pointer;
+
+}
+.name-button {
+    height: 35px;
+    width: 160px !important;
+    padding: 5px 10px 5px !important;
+    margin-left: 0 !important;
+    background-color: white;
+    border: none;
+}
+.name-button:hover {
+  background-color:#e8e8e8; /* Green */
 }

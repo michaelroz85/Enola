@@ -1,5 +1,9 @@
 import "./SideBarButtons.css";
-import { Button } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
+import ProfilePage from "../../pages/profile-page/ProfilePage";
+import { Button, lebel } from "@mui/material";
+import Typography from "@mui/material/Typography";
+
 import {
   addTask,
   myTasks,
@@ -9,7 +13,10 @@ import {
 } from "../../assets/svgIcons/svgIcons.js";
 
 const SideBarButtons = () => {
+  const navigate = useNavigate();
+  let { id, family_id } = useParams();
   return (
+
     <>
       <Button
         className="side-button"
@@ -20,22 +27,40 @@ const SideBarButtons = () => {
         variant="contained"
         size="medium"
         color="button"
-        startIcon={addTask}
-      >
+        startIcon={addTask}>
+               {family_id &&
+                <grid 
+                onClick={() =>{navigate(`/create-task/${family_id}`)}}
+                  />}
+        <Typography className="button-text"
+      style={{
+        marginRight: "2vw",
+        flexGrow: 1,
+        fontSize: "13.5px",
+      }}
+    >
         משימה חדשה
+    </Typography>
       </Button>
       <Button
         className="side-button"
         style={{
           marginBottom: "10px",
-          justifyContent: "flex-start",
         }}
         variant="contained"
         size="medium"
         color="button"
         startIcon={myTasks}
       >
-        המשימות שלי
+        <Typography className="button-text"
+          style={{
+            marginRight: "2vw",
+            flexGrow: 1,
+            fontSize: "13.5px",
+          }}
+        >
+          המשימות שלי
+        </Typography>
       </Button>
       <Button
         className="side-button"
@@ -48,7 +73,15 @@ const SideBarButtons = () => {
         color="button"
         startIcon={myWeek}
       >
-        השבוע שלי
+        <Typography className="button-text"
+          style={{
+            marginRight: "2vw",
+            flexGrow: 1,
+            fontSize: "13.5px",
+          }}
+        >
+          השבוע שלי
+        </Typography>
       </Button>
       <Button
         className="side-button"
@@ -61,7 +94,15 @@ const SideBarButtons = () => {
         color="button"
         startIcon={todoList}
       >
-        רשימה
+        <Typography className="button-text"
+          style={{
+            marginRight: "2vw",
+            flexGrow: 1,
+            fontSize: "13.5px",
+          }}
+        >
+          רשימה
+        </Typography>
       </Button>
       <Button
         className="side-button"
@@ -73,8 +114,18 @@ const SideBarButtons = () => {
         size="medium"
         color="button"
         startIcon={profile}
+        onClick={() => { navigate('/profile') }}
       >
-        פרופיל
+        <Typography className="button-text"
+          style={{
+            marginRight: "2vw",
+            flexGrow: 1,
+            fontSize: "13.5px",
+          }}
+        >
+          פרופיל
+        </Typography>
+
       </Button>
     </>
   );

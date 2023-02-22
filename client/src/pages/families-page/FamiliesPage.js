@@ -6,29 +6,41 @@ import { TextField, Typography } from "@mui/material";
 import MainBlueButton from "../../components/styled/MainBlueButton";
 import Spinner from "../../components/Spinner/Spinner";
 import "./FamiliesPage.css";
+
 const Families = () => {
   const navigate = useNavigate();
   const [families, setFamilies] = useState([]);
-  const [filter, setFilter] = useState("");
+  const [searchName, setFilter] = useState("");
   const [filteredFamilies, setFilteredFamilies] = useState([]);
   const [error, setError] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://18.197.147.245/api/families")
+    fetch("http://localhost:5000/families", {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+        "Authorization": localStorage.token
+      }
+    })
       .then((response) => {
         if (response.ok) {
           return response.json();
         }
-        throw response;
+        //throw response;
       })
-      .then((data) =>
-        setFamilies(
-          data /* .filter((family) => {
-          return family.last_name !== null;
-        }) */
-        )
-      )
+      .then((data) => {
+        try {
+          setFamilies(
+            data.filter((family) => {
+              return family.last_name !== null;
+            })
+          )
+        } catch (err) {
+          console.log(err)
+        }
+
+      })
       .then(() => {
         setIsLoading(false);
       })
@@ -42,14 +54,15 @@ const Families = () => {
   useEffect(() => {
     setFilteredFamilies(
       families.filter((family) => {
-        return family.name_of_family
+        console.log(family)
+        return family.last_name
           .toLowerCase()
-          .includes(filter.toLowerCase());
+          .includes(searchName.toLowerCase());
       })
     );
-  }, [filter]);
+  }, [searchName]);
 
-  const familiesToShow = filter ? filteredFamilies : families;
+  const familiesToShow = searchName ? filteredFamilies : families;
 
   return (
     <>
@@ -57,7 +70,7 @@ const Families = () => {
         pageComponent={
           <div>
             <div className="choose-or-create-main">
-              <div className="choose-or-create-div" style={{}}>
+              <div className="choose-or-create-div" >
                 <div className="choose-text-div">
                   <Typography
                     color="white"
@@ -70,22 +83,34 @@ const Families = () => {
                 <div className="create-btn-div">
                   <MainBlueButton
                     style={{
-                      paddingTop: "10px",
-                      paddingBottom: "10px",
-                      marginTop: "0px",
+                      top: "-7px",
+                      // paddingBottom: "17px",
+                      // marginTop: "0px",
+                      padding: "14px",
                     }}
                     onClick={() => {
                       navigate("/create-family");
                     }}
-                  >
+                  > <Typography
+                  color="white"
+                  variant="h4"
+                  className="chose-family"
+                >
                     {"צור משפחה"}
+                </Typography>
                   </MainBlueButton>
                 </div>
+
               </div>
             </div>
             <div className="search-bar-div">
               <TextField
-                value={filter}
+                InputProps={{
+                  inputProps: {
+                    style: { textAlign: "right" },
+                  }
+                }}
+                value={searchName}
                 size="small"
                 fullWidth
                 placeholder="חפש משפחה"
@@ -96,7 +121,7 @@ const Families = () => {
             </div>
             {isLoading ? (
               <div className="spinner-box">
-                <Spinner />
+                {<Spinner />}
               </div>
             ) : (
               <div className="families-card-div">
@@ -105,7 +130,7 @@ const Families = () => {
                     <FamilyElement
                       key={family.family_id}
                       family_id={family.family_id}
-                      name={family.name_of_family}
+                      name={family.last_name}
                       volunteers_count={family.volunteersCount}
                     />
                   );
