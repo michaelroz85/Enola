@@ -1,33 +1,42 @@
 import AppBar from "../../components/AppBar/AppBar";
-import neighboor from "../../assets/neighboor2.svg";
+import neighboor from "../../assets/babushka.png"//"../../assets/neighboor2.svg";
 import { Typography, Grid } from "@mui/material";
 import MainBlueButton from "../../components/styled/MainBlueButton";
 import MainGreenButton from "../../components/styled/MainGreenButton";
 import { useNavigate } from "react-router-dom";
 import SvgWave from "../../assets/svgIcons/SvgWave";
+import AuthForm from "../../components/Auth/AuthForm"
+import { AuthContextProvider } from "../../components/Auth/auth-context"
 
 import "./WelcomePage.css";
 function Welcome() {
   const navigate = useNavigate();
+ 
 
   return (
     <>
       <AppBar />
-      <SvgWave />
+
       <img
         className="neigboor-img"
         src={neighboor}
         alt="neighboor"
         loading="lazy"
       ></img>
-      <div className="home-buble">
+      {
+        !localStorage.getItem('token') 
+       ? <AuthContextProvider>
+          <AuthForm />
+        </AuthContextProvider>
+          
+      :<div className="home-buble">
         <Grid container className="main-container">
-          <Typography fontSize="40px" variant="h1" marginTop="10px">
-            {"ברוך הבא ליד תמר"}
+          <Typography fontSize="40px" variant="h1" marginTop="10px" marginY={-1} marginX={10}>
+            {"Enola-ברוך הבא ל"}
           </Typography>
-          <Typography variant="subtitle">
+          <Typography variant="subtitle" marginTop="10px">
             {
-              "            על מנת להתחיל התקשרות יש ליצור משפחה חדשה או להצטרף למשפחה קיימת"
+              "  על מנת להתחיל התקשרות יש ליצור משפחה חדשה או להצטרף למשפחה קיימת"
             }
           </Typography>
           <Grid
@@ -48,14 +57,16 @@ function Welcome() {
             </MainBlueButton>
             <MainGreenButton
               onClick={() => {
-                navigate("/families");
+                navigate("/families")
               }}
             >
               {"בחר משפחה"}
             </MainGreenButton>
           </Grid>
         </Grid>
-      </div>
+      </div> }
+      <SvgWave />
+      {/* <div className="grass"></div> */}
     </>
   );
 }

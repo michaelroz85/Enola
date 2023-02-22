@@ -18,6 +18,12 @@
   height: 100vh;
   max-width: 60rem;
 }
+
+.container {
+  text-align: center;
+  height: 200vh;
+  max-width: 160rem;
+}
 .task-element-container {
   margin: 30px auto auto auto;
   width: 80%;

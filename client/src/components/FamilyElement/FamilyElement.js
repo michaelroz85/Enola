@@ -1,10 +1,10 @@
 import { Grid, Typography, Avatar } from "@mui/material";
 import MainGreenButton from "../styled/MainGreenButton";
 import MainGreyButton from "../styled/MainGreyButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./FamilyElement.css";
 
-const FamilyElement = ({ name, family_id, volunteers_count }) => {
+const FamilyElement = ({ name, family_id, volunteers_count, phone }) => {
   const navigate = useNavigate();
   return (
     <div style={{ marginBottom: "20px" }}>
@@ -26,7 +26,10 @@ const FamilyElement = ({ name, family_id, volunteers_count }) => {
             <div>
               <Avatar sx={{ width: 65, height: 65, mt: "10px" }} />
             </div>
-            <div className="card-text">
+            <div className="card-text"
+              onClick={() => {
+                navigate(`/families/${family_id}`);
+              }}>
               <Typography variant="subtitle1">{"משפחת"}</Typography>
               <Typography variant="h4">{name}</Typography>
             </div>

@@ -4,17 +4,54 @@ import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 import { Divider } from "@mui/material";
 import SideBarButtons from "../SideBarButtons/SideBarButtons";
+import React, { useState, useEffect } from "react";
+import ProfilePage from '../../pages/profile-page/ProfilePage';
 
-const PageLayout = ({ pageComponent, headerText }) => {
+
+
+const PageLayout = ({ props, pageComponent, headerText }) => {
+  const [name, setName] = useState("");
+  let data;
+
+
+  const getUserData = async () => {
+    let fullName;
+    try {
+      const response = await fetch(
+        `http://localhost:5000/auth/get-user-data/`, {
+        headers: {
+          // "Access-Control-Allow-Origin": "*",
+          // "Content-Type": "application/json",
+          "Authorization": localStorage.token
+        },
+      }
+      );
+      if (response.ok) {
+        data = await response.json();
+        fullName = data.foundUser.first_name + " " + data.foundUser.last_name
+        setName(data.foundUser.first_name)
+        console.log(data)
+        return data
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+  const promise1 = new Promise((resolve, reject) => {
+    resolve('Success!');
+  });
+
   return (
     <>
       <AppBar />
       <ColorFill text={headerText} />
-      <Grid container className="grid-container">
-        <Grid item xs={2}>
+
+      <Grid container alignItems="right" className="grid-container" style={{display:"flow"}}>
+        <Grid item xs={2} >
           <Grid container alignItems="center" flexDirection="column">
-            <Typography mt="30px" fontSize="22px" variant="h4">
-              יעקוב ישראלי
+            <Typography mt="30px" fontSize="22px" variant="h4" name={getUserData()}>
+              {" שלום " + name}
             </Typography>
             <Grid
               container
@@ -44,14 +81,14 @@ const PageLayout = ({ pageComponent, headerText }) => {
               </svg>
             </Grid>
             <Divider width="90%" />
-            <Grid container flexDirection="column" width="92%" marginTop="20px">
+            <Grid container flexDirection="column" width="92%" marginTop="20px" margin="right" style={{display:"flow"}}>
               <SideBarButtons />
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item className="layout-divider" xs={0.2}></Grid>
-        <Grid item xs={9.8}>
-          {pageComponent}
+          {/* <Grid item className="layout-divider" xs={0.2}></Grid> */}
+          <Grid item xs={9.8} style={{ display: "flex" }}>
+            {pageComponent}
+          </Grid>
         </Grid>
       </Grid>
     </>

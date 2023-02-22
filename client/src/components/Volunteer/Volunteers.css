@@ -1,0 +1,83 @@
+.create-or-add {
+  height: 90%;
+  width: 40%;
+  margin: 10px;
+  /* margin-left: 300px; */
+  border-radius: 20px;
+  background-color: #e8e8e8;
+  display:inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding-bottom: 15px;
+  padding-top: 10px;
+}
+.btn {
+  height: 35px;
+  width: 160px !important;
+  padding: 5px 10px 5px !important;
+  margin-left: 0 !important;
+}
+
+.name-avatar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 46%;
+}
+.avatar {
+  height: 120px !important;
+  width: 120px !important;
+}
+.volunteers-list {
+  /* display: inline-block; 
+  margin:center;
+  /* margin-top: 200px; */
+  /* overflow-x:inherit; 
+  height: 40vh;
+  width:40%;
+  color:rgb(98, 39, 108); */
+  height: 90%;
+  width: auto;
+  margin: 0 10px;
+  /* align-self: 30px; */
+  gap: 10px;
+  border-radius: 20px;
+  background-color: #e8e8e8;
+  /* display:flex; */
+  /* align-items: center; */
+  /* justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding-bottom: 15px;
+  padding-top: 10px; */
+
+}
+.family-img {
+  position: absolute;
+  left: 40px;
+  top: -60px;
+  height: 200px;
+  transform: scaleX(-1);
+}
+.right-side-layout {
+  overflow: auto !important;
+  justify-content: flex-start !important;
+  padding-top: 45px !important;
+  width: 90% !important;
+  height: 98% !important;
+  margin-right: 30px !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+}
+.down-page-container{
+  display: inline-flex;
+  height: 30%;
+  width: 100%;
+  /* padding: auto; */
+  margin: 0 10px;
+
+  /* margin-inline-end: 200px; */
+}

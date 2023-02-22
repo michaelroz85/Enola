@@ -30,11 +30,11 @@
   height: 120px !important;
   width: 120px !important;
 }
-.volunteers-list {
+/* .volunteers-list {
   margin-top: 30px;
   overflow-x: auto;
   height: 40vh;
-}
+} */
 .family-img {
   position: absolute;
   left: 40px;

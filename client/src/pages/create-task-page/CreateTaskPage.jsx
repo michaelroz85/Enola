@@ -8,23 +8,44 @@ import { Typography } from "@mui/material";
 import moment from "moment";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import MainGreenButton from "../../components/styled/MainGreenButton";
+import MainBlueButton from "../../components/styled/MainBlueButton";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import VolunteersList from '../../components/Volunteer/VolunteersList'
 
 function CreateTask() {
   const CreateTaskLayout = () => {
     const navigate = useNavigate();
     const [value, setValue] = useState(moment().valueOf());
     const [taskName, setTaskName] = useState("");
+    const [taskHelper, setTaskHelper] = useState();
+    const [helpersList, setHelpersList] = useState(false);
     const [taskDescription, setTaskDescription] = useState("");
     const { id } = useParams();
 
+    const onAddF =(volinteer) => {
+      console.log("E",volinteer)
+      setTaskHelper(volinteer)
+    }
+    const showVolonteersListHandler = () => {
+      setHelpersList(true)
+      console.log(id)
+    }
+
+    const handleCancelTask = () => {
+      navigate(-1)
+    }
+    
     const handleAddTask = () => {
       taskName &&
-        fetch("http://18.197.147.245/api/tasks/", {
+        fetch("http://localhost:5000/tasks/", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": localStorage.token
+          },
           body: JSON.stringify({
             family_id: id,
+            helper_id: taskHelper,
             task_name: taskName,
             comments: taskDescription,
             date: value,
@@ -32,7 +53,6 @@ function CreateTask() {
         });
       navigate(-1);
     };
-
     return (
       <div className="container">
         <div className="task-container">
@@ -64,12 +84,30 @@ function CreateTask() {
               className="task-details-input"
               placeholder="הקלד כאן"
             />
-            <div className="buttons-container">
+            <>
+              <div className="buttons-container">
+                <MainBlueButton onClick={showVolonteersListHandler}>
+                  <Typography variant="h4" fontSize="25px">
+                    {"בחר המתנדב"}
+                  </Typography>
+                </MainBlueButton>
+              </div>
+              <div className="volunteers-container">
+                {helpersList === true && <VolunteersList 
+                  fam_id={id} 
+                  family_id={id}
+                  className="add-volunteer-button"
+                  onAdd ={(e, i) => {onAddF(i)}}
+                   />}
+              </div>
+
+            </>
+            <div className="buttons-container" >
               <MainGreenButton onClick={handleAddTask} className="green-btn">
                 {"סיים"}
               </MainGreenButton>
               <div className="trash-icon-div">
-                <DeleteForeverOutlinedIcon className="trash-icon" />
+                <DeleteForeverOutlinedIcon onClick={handleCancelTask} className="trash-icon" />
                 <p className="delete-text">מחק משימה</p>
               </div>
             </div>

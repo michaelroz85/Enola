@@ -7,8 +7,10 @@ export const DetailsGrid = styled(Grid)`
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
+  margin-right: 25%;
   line-height: 20px;
-`;
+  dir: rtl;`
+;
 
 const DetailsItem = ({ fieldName, fieldValue }) => {
   return (

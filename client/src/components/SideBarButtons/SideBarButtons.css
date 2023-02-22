@@ -1,17 +1,25 @@
 .side-button {
   padding-right: 3px !important;
 }
+
 .svg-icon {
   margin-left: 5px !important;
 }
-@media only screen and (max-width: 1050px) {
-  .side-button {
-    padding-left: 2px !important;
-  }
+
+/* @media screen and (max-width: 1050px) { */
+.side-button {
+  padding-left: 2px !important;
 }
-@media only screen and (max-width: 950px) {
-  .side-button {
-    padding-left: 1px !important;
-    font-size: smaller !important;
-  }
+
+.side-button {
+  padding-left: 1px !important;
+  font-size: smaller !important;
+  margin-bottom: "10px";
 }
+
+.button-text {
+  margin-right: "6vw";
+  flex-grow: 1;
+  font: smaller;
+}
+

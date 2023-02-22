@@ -1,3 +1,4 @@
+
 import moment from "moment";
 import { useState, useMemo } from "react";
 import SimpleDialog from "./TaskPopup";
@@ -29,12 +30,13 @@ const Task = ({
 
   const updateTask = async (volunteerId) => {
     const updateResponse = await fetch(
-      `http://18.197.147.245/api/tasks/${task_id}`,
+      `http://localhost:5000/tasks/${task_id}`,
       {
         method: "PUT",
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Content-Type": "application/json",
+          "Authorization": localStorage.token
         },
         body: JSON.stringify({
           task_name,
@@ -70,14 +72,31 @@ const Task = ({
     }
   };
 
-  const helperTextPicker = () => {
+  const helperTextPicker = async () => {
     if (helper_id === null) {
       setHelperText("פנוי");
     } else if (helper_id === volunteerId) {
       setHelperText("אתה");
     } else if (helper_id) {
-      setHelperText(helper_id);
-    }
+      try {
+        const response = await fetch(
+          `http://localhost:5000/volunteers/${helper_id}/`,{
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              "Authorization": localStorage.token
+            },
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+            setHelperText(data.first_name);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }; 
+    
   };
 
   useMemo(() => {

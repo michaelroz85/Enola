@@ -1,3 +1,9 @@
+.add-volunteer-button {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+  justify-content: space-between;
+}
 .container {
   height: 100%;
   width: 100%;
@@ -7,6 +13,17 @@
   height: 90%;
   width: 60%;
   overflow-x: auto;
+}
+.volunteers-container {
+  padding-top: 15px;
+  display:list-item;
+  align-items: center;
+  padding-left: 36%;
+  height:auto;
+  width:auto; 
+  /* overflow-x: auto; */
+  /* border: 18px;
+  border-color: rgb(76, 115, 150); */
 }
 
 .img-container {
@@ -46,6 +63,7 @@
   margin-top: 20px !important;
 }
 .task-name-input {
+  text-align:right;
   width: 90%;
   height: 30px;
   border: none;
@@ -56,6 +74,7 @@
 }
 
 .task-details-input {
+  text-align:right;
   width: 90%;
   border: none;
   border-bottom: 1px solid #909597;
@@ -70,14 +89,19 @@
   color: #e8e8e8;
 }
 .green-btn {
+  display: inline-block;
+  /* align-items: center; */
+  margin-top:45px; 
   height: 30px;
   width: 150px !important;
 }
 .buttons-container {
-  display: flex;
+  align-self: center;
+  display:inline-block;
   flex-direction: row;
   width: 90%;
   justify-content: space-between;
+  margin-left: 7px;
 }
 .trash-icon {
   color: #eb8f7c;
@@ -86,14 +110,16 @@
   width: 30px !important;
 }
 .trash-icon-div {
-  display: flex;
+  display:inline-flex;
   flex-direction: row;
   align-self: flex-end !important;
   align-items: center;
   height: 35px;
   width: 180px;
   position: relative;
-  bottom: 4px;
+  bottom: -4px;
+  margin-left: 10%;
+  padding-top: 10px;
 }
 .delete-text {
   position: relative;
