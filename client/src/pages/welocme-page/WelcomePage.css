@@ -1,8 +1,8 @@
 .neigboor-img {
   transform: scalex(-1);
-  position: absolute;
-  top: 25vh;
-  left: 20vw;
+  position: relative;
+  top: 15vh;
+  right: 65vw;
   height: 60vh;
   z-index: 4;
 }
@@ -14,7 +14,7 @@
   justify-content: center;
   position: relative;
   right: 26%;
-  top: 150px;
+  top: -40vh;
   background-color: #f5ebeb;
   border: 0.8px solid black;
   border-radius: 10px;

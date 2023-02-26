@@ -22,13 +22,13 @@ function Volunteers(fam_id) {
       const fetchVolunteers = async () => {
         try {
           const response = await fetch(
-            `http://localhost:5000/volunteers/volunteers-for-family/${fami_id}/`,{
-              headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json",
-                "Authorization": localStorage.token
-              },
-            }
+            `http://localhost:5000/volunteers/volunteers-for-family/${fami_id}/`, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+              "Authorization": localStorage.token
+            },
+          }
           );
           if (response.ok) {
             const data = await response.json();
@@ -52,46 +52,56 @@ function Volunteers(fam_id) {
           family_id={parseInt(family_id)}
         />
         <div  >
-        <Grid container flexDirection="row" height="100%" className="down-page-container" >
-              <div className="create-or-add" >
-                <Typography variant="h4" fontSize="20px" marginBottom="20px" textAlign="center">
-                  {"מתנדבים"}
-                </Typography>
-                {volunteers.map((volunteer) => {
-                  return (
-                    <Volunteer
-                      setVolunteers={setVolunteers}
-                      name={volunteer?.first_name}
-                      id={volunteer?.user_id}
-                      family_id={family_id}
-                      key={volunteer?.user_id}
-                    />
-                  );
-                })}
-              </div>
-              <div className="create-or-add">
-                <Typography fontSize="20px" variant="h4">
-                  {"הוסף מתנדבים"}
-                  <br /> {"או"} <br /> {"צור משימה"}
-                </Typography>
-                <MainBlueButton
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                  className="btn"
-                >
-                  {"הוסף מתנדבים"}
-                </MainBlueButton>
-                <MainGreenButton
-                  onClick={() => {
-                    navigate(`/create-task/${family_id}`);
-                  }}
-                  className="btn"
-                >
-                  {"צור משימה"}
-                </MainGreenButton>
-              </div>
-        </Grid>
+          <Grid container flexDirection="row" height="100%" className="down-page-container" >
+            <div className="create-or-add" >
+              <Typography variant="h4" fontSize="20px" marginBottom="20px" textAlign="center">
+                {"מתנדבים"}
+              </Typography>
+              {volunteers.map((volunteer) => {
+                return (
+                  <Volunteer
+                    setVolunteers={setVolunteers}
+                    name={volunteer?.first_name}
+                    id={volunteer?.user_id}
+                    family_id={family_id}
+                    key={volunteer?.user_id}
+                  />
+                );
+              })}
+            </div>
+            <div className="create-or-add">
+              <Typography fontSize="20px" variant="h4">
+                {"הוסף מתנדבים או צור משימה"}
+              </Typography>
+              <MainBlueButton
+                onClick={() => {
+                  setOpen(true);
+                }}
+                className="btn"
+              >
+                {"הוסף מתנדבים"}
+              </MainBlueButton>
+              <MainGreenButton
+                onClick={() => {
+                  navigate(`/create-task/${family_id}`);
+                }}
+                className="btn"
+              >
+                {"צור משימה"}
+              </MainGreenButton>
+              <MainBlueButton
+              className="btn"
+                style={{
+                  width: "450px"
+                }}
+                onClick={() => {
+                  navigate(`/tasks/tasks-for-family/${family_id}`);
+                }}
+              >
+                {"משימות קימות"}
+              </MainBlueButton>
+            </div>
+          </Grid>
         </div>
       </>
     );

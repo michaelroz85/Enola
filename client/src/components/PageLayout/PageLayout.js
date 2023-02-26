@@ -47,9 +47,9 @@ const PageLayout = ({ props, pageComponent, headerText }) => {
       <AppBar />
       <ColorFill text={headerText} />
 
-      <Grid container alignItems="right" className="grid-container" style={{display:"flow"}}>
-        <Grid item xs={2} >
-          <Grid container alignItems="center" flexDirection="column">
+      <div container alignItems="right" className="grid-container" >
+        <div item xs={2} >
+          <div container alignItems="center" flexDirection="column" className="side-container">
             <Typography mt="30px" fontSize="22px" variant="h4" name={getUserData()}>
               {" שלום " + name}
             </Typography>
@@ -84,13 +84,13 @@ const PageLayout = ({ props, pageComponent, headerText }) => {
             <Grid container flexDirection="column" width="92%" marginTop="20px" margin="right" style={{display:"flow"}}>
               <SideBarButtons />
             </Grid>
-          </Grid>
+          </div>
           {/* <Grid item className="layout-divider" xs={0.2}></Grid> */}
-          <Grid item xs={9.8} style={{ display: "flex" }}>
+          <div item xs={9.8} className="main-conteiner" >
             {pageComponent}
-          </Grid>
-        </Grid>
-      </Grid>
+          </div>
+        </div>
+      </div>
     </>
   );
 };

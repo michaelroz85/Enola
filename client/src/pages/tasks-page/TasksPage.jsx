@@ -66,6 +66,7 @@ function Tasks() {
     const completedTasks = allTasks.filter(
       (task) => task.createdAt === true
     ).length;
+    console.log("completed", allTasks,completedTasks)
     setCompletedPrecent((completedTasks / allTasks.length) * 100);
   };
 

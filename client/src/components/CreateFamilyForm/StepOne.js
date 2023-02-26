@@ -98,12 +98,19 @@ const FormStepOne = ({ setStep, data, setData, image, setImage }) => {
                 setData({ ...data, first_name: e.target.value });
               }}
             />
-            <FormLabel text={"שם משפחה"} />
+            <FormLabel text={"שם משפחה"} 
+             style={{
+              // marginRight: "122vw",
+              textAlign: "center",
+              flexGrow: 1,
+              fontSize: "13.5px",
+            }}/>
             <TextField
               {...register("last_name")}
               error={!!errors.last_name}
               helperText={errors?.last_name?.message}
               value={data.last_name}
+              textAlign= "center"
               onChange={(e) => {
                 setData({ ...data, last_name: e.target.value });
               }}
@@ -134,7 +141,7 @@ const FormStepOne = ({ setStep, data, setData, image, setImage }) => {
                 <Grid item>
                   {id ?
                     <MainGreenButton
-                      style={buttonStyle}
+                      style={{...buttonStyle, left:"-30%"}}
                       onClick={handleSubmit(() => {
                         setStep(2)
                       })}
@@ -142,7 +149,7 @@ const FormStepOne = ({ setStep, data, setData, image, setImage }) => {
                       {"ערוך"}
                     </MainGreenButton>
                     : <MainGreenButton
-                      style={buttonStyle}
+                      style={{...buttonStyle, left:"30%"}}
                       onClick={handleSubmit(() => {
                         setStep(2)
                       })}
@@ -155,7 +162,7 @@ const FormStepOne = ({ setStep, data, setData, image, setImage }) => {
                 <Grid item>
                   {id && (
                     <MainRedButton
-                      style={buttonStyle}
+                      style={{...buttonStyle, right:"-30%"}}
                       onClick={() => {
                         fetch(`http://5000/families/${id}`, {
                           method: "DELETE",

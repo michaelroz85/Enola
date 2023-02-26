@@ -32,7 +32,7 @@ function Welcome() {
       :<div className="home-buble">
         <Grid container className="main-container">
           <Typography fontSize="40px" variant="h1" marginTop="10px" marginY={-1} marginX={10}>
-            {"Enola-ברוך הבא ל"}
+            {"ברוך הבא ל- Enola"}
           </Typography>
           <Typography variant="subtitle" marginTop="10px">
             {
@@ -46,6 +46,7 @@ function Welcome() {
               display: "flex",
               justifyContent: "space-evenly",
               width: "95%",
+              height: "30%"
             }}
           >
             <MainBlueButton

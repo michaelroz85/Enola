@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ProfilePage from "../../pages/profile-page/ProfilePage";
 import { Button, lebel } from "@mui/material";
 import Typography from "@mui/material/Typography";
-
+import family from "../../assets/family.png";
+import { familyImg} from "../CreateFamilyForm/styles";
 import {
   addTask,
   myTasks,
@@ -11,6 +12,7 @@ import {
   profile,
   todoList,
 } from "../../assets/svgIcons/svgIcons.js";
+import { height } from "@mui/system";
 
 const SideBarButtons = () => {
   const navigate = useNavigate();
@@ -22,30 +24,30 @@ const SideBarButtons = () => {
         className="side-button"
         style={{
           marginBottom: "10px",
-          justifyContent: "flex-start",
+          marginRight: "10px"
         }}
         variant="contained"
         size="medium"
         color="button"
         startIcon={addTask}>
-               {family_id &&
-                <grid 
-                onClick={() =>{navigate(`/create-task/${family_id}`)}}
-                  />}
+        {family_id &&
+          <grid
+            onClick={() => { navigate(`/create-task/${family_id}`) }}
+          />}
         <Typography className="button-text"
-      style={{
-        marginRight: "2vw",
-        flexGrow: 1,
-        fontSize: "13.5px",
-      }}
-    >
-        משימה חדשה
-    </Typography>
+          style={{
+            flexGrow: 1,
+            fontSize: "13.5px",
+          }}
+        >
+          משימה חדשה
+        </Typography>
       </Button>
       <Button
         className="side-button"
         style={{
           marginBottom: "10px",
+          marginRight: "10px"
         }}
         variant="contained"
         size="medium"
@@ -54,7 +56,6 @@ const SideBarButtons = () => {
       >
         <Typography className="button-text"
           style={{
-            marginRight: "2vw",
             flexGrow: 1,
             fontSize: "13.5px",
           }}
@@ -66,6 +67,7 @@ const SideBarButtons = () => {
         className="side-button"
         style={{
           marginBottom: "10px",
+          marginRight: "10px",
           justifyContent: "flex-start",
         }}
         variant="contained"
@@ -75,7 +77,6 @@ const SideBarButtons = () => {
       >
         <Typography className="button-text"
           style={{
-            marginRight: "2vw",
             flexGrow: 1,
             fontSize: "13.5px",
           }}
@@ -87,6 +88,7 @@ const SideBarButtons = () => {
         className="side-button"
         style={{
           marginBottom: "10px",
+          marginRight: "10px",
           justifyContent: "flex-start",
         }}
         variant="contained"
@@ -96,7 +98,6 @@ const SideBarButtons = () => {
       >
         <Typography className="button-text"
           style={{
-            marginRight: "2vw",
             flexGrow: 1,
             fontSize: "13.5px",
           }}
@@ -108,6 +109,7 @@ const SideBarButtons = () => {
         className="side-button"
         style={{
           marginBottom: "10px",
+          marginRight: "10px",
           justifyContent: "flex-start",
         }}
         variant="contained"
@@ -118,7 +120,6 @@ const SideBarButtons = () => {
       >
         <Typography className="button-text"
           style={{
-            marginRight: "2vw",
             flexGrow: 1,
             fontSize: "13.5px",
           }}
@@ -128,6 +129,7 @@ const SideBarButtons = () => {
 
       </Button>
     </>
+
   );
 };
 export default SideBarButtons;

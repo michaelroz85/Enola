@@ -5,6 +5,9 @@ import MainBlueButton from "../styled/MainBlueButton";
 import { buttonStyle, textStyle } from "./styles.js";
 import DetailsItem from "../DetailsItem/DetailsItem.jsx";
 import Volunteers from "../../pages/volunteers-page/VolunteersPage";
+import MainRedButton from "../styled/MainRedButton";
+import { maxWidth } from "@mui/system";
+
 
 const DisplayData = ({ data, setStep }) => {
   const displayDataFields = [
@@ -50,6 +53,43 @@ const DisplayData = ({ data, setStep }) => {
       console.log(err);
     }
   };
+  const deleteFamily = async () => {
+    console.log("deletedjhjgvghcj")
+    const deleteResponse = await fetch(
+      `http://localhost:5000/families/${family_id}`, 
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": localStorage.token
+        },
+      }
+    );
+    if (deleteResponse.ok) {
+      console.log("deleted", deleteResponse)
+      // try {
+      //   const volunteersResponse = await fetch(
+      //     `http://localhost:5000/volunteers/volunteers-for-family/${family_id}`, {
+      //     headers: {
+      //       "Access-Control-Allow-Origin": "*",
+      //       "Content-Type": "application/json",
+      //       "Authorization": localStorage.token
+      //     }
+      //   }
+      //   );
+      //   if (volunteersResponse.ok) {
+      //     const data = await volunteersResponse.json();
+      //     setVolunteers(data);
+      //   } else {
+      //     console.log("error");
+      //   }
+      // } catch (error) {
+      //   console.log(error);
+      // }
+    }
+    navigate("/families");
+
+  };
 
   const handleEditFamily = () => {
     id = family_id;
@@ -61,26 +101,27 @@ const DisplayData = ({ data, setStep }) => {
   console.log(id, family_id)
   return (
     <div
-      container
-      overflow="auto"
+      // container
+      // overflow="auto"
       style={{
         direction:"rtl",
         height: "50vh",
-        textAlign: "center",
+        // textAlign: "center",
         flexFlow: "column nowrap",
         alignItems: "center",
         paddingBottom: "30px",
+        marginRight: "-500px"
       }}
     >
       
         <div className="detailsHeader">
           <Typography variant="h4" color="#8ca8e0">
-          {(id || family_id) ? (` משפחת ${data.last_name}`): 
+          {(id || family_id) ? "": 
           ("נא לוודא את הפרטים לפני יצירת המשפחה" )}
           </Typography>
         </div>
      
-      <Typography variant="h5" marginBottom="20px">
+      <Typography variant="h5" marginBottom="20px" marginTop="20px" style={{textAlign: "center"}}>
         {"פרטים אישיים"}
       </Typography>
       {displayDataFields.map(({ fieldname, fieldvalue }) => (
@@ -93,7 +134,7 @@ const DisplayData = ({ data, setStep }) => {
       ))}
       <div className="display-btn-container">
         <MainBlueButton
-          style={{...buttonStyle,   right: "38%" }}
+          style={{...buttonStyle,   right: "0%" }}
           onClick={() => {
             setStep(1);
             family_id && navigate(`/create-family/${family_id}`)
@@ -105,6 +146,7 @@ const DisplayData = ({ data, setStep }) => {
           <MainGreenButton style={buttonStyle} onClick={handleUpdateFamily}>
             עדכן משפחה
           </MainGreenButton>
+        
         )}
         {
           !id && !family_id && (
@@ -112,6 +154,13 @@ const DisplayData = ({ data, setStep }) => {
               צור משפחה
             </MainGreenButton>)
         } 
+        <MainRedButton
+           style={{...buttonStyle,  left: "0px", maxWidth: "40%"}}
+           family_id={family_id}
+           onClick={deleteFamily}
+         >
+           {"מחק משפחה"}
+         </MainRedButton>
         {id && <Volunteers/>}
       </div>
     </div>

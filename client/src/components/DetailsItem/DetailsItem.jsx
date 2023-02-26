@@ -5,6 +5,7 @@ export const DetailsGrid = styled(Grid)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  text-align: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
   margin-right: 25%;
@@ -16,7 +17,7 @@ const DetailsItem = ({ fieldName, fieldValue }) => {
   return (
     <DetailsGrid item>
       <Typography variant="subtitle1">{fieldName}</Typography>
-      <Typography variant="subtitle1">{fieldValue}</Typography>
+      <Typography variant="subtitle1" style={{textAlign: "center"}}>{fieldValue}</Typography>
     </DetailsGrid>
   );
 };

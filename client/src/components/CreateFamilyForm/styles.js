@@ -4,10 +4,10 @@ import Typography from '@material-ui/core/Typography';
 export const formContainer = {
   overflow: "auto",
   justifyContent: "flex-start",
-  paddingTop: "25px",
-  width: "40vw",
+  paddingTop: "10vw",
+  width: "50vw",
   height: "70vh",
-  marginRight: "700px",
+  marginRight: "100px",
   flexDirection: "column",
   textAlign: "center"
 };
@@ -17,7 +17,7 @@ export const textStyle = {
 export const familyImg = {
   position: "absolute",
   left: "73%",
-  top: "460px",
+  top: "65%",
   height: "180px",
   transform: "scaleX(-1)",
 };
@@ -35,7 +35,7 @@ export const avatar = {
   alignSelf: "flex-end",
 };
 export const buttonsContainer = {
-  width: "100%",
+  width: "90%",
   justifyContent: "space-between",
   flexWrap: "wrap",
 };
@@ -46,6 +46,7 @@ export const buttonStyle = {
    alignItems: "center",
    justifyContent: "space-between",
   flexWrap: "wrap",
+  display: "block"
   // right: "-50%"
 };
 export const detailsHeader = {

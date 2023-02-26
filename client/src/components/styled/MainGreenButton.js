@@ -36,7 +36,7 @@ const MainGreenButton = styled("button")`
     left: 0px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 568px) {
   }
 `;
 
